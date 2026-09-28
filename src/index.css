@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #0c0c0e;
+    --bg-secondary: #141418;
+    --text-primary: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --accent-gold: #d4af37;
+  }
+
+  html.light {
+    --bg-primary: #faf9f6;
+    --bg-secondary: #ffffff;
+    --text-primary: #18181b;
+    --text-muted: #71717a;
+    --accent-gold: #c59b27;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0c0e;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Hide scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Print styling for invoices */
+@media print {
+  header, footer, button, .no-print, .fixed {
+    display: none !important;
+  }
+  body, #root, #invoice-printable {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+  }
+  #invoice-printable {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  #invoice-printable * {
+    color: #000000 !important;
+  }
+}

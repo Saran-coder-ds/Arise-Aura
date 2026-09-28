@@ -1,0 +1,411 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile for shoppers and administrators",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "User identifier matching Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User avatar URL"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["customer", "admin"],
+          "description": "User authorization role"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "shippingAddress": {
+          "type": "string",
+          "description": "Default shipping street address and city"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Merchandise apparel catalog item (T-shirts, Jerseys, Polos)",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique product SKU / ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Product title"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category name such as Printed T-Shirts, Football Jerseys, etc."
+        },
+        "price": {
+          "type": "number",
+          "description": "Current selling price in INR"
+        },
+        "originalPrice": {
+          "type": "number",
+          "description": "Original retail price before discount"
+        },
+        "discountPercent": {
+          "type": "number",
+          "description": "Percentage discount badge"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Product average customer review rating"
+        },
+        "reviewsCount": {
+          "type": "number",
+          "description": "Total number of reviews"
+        },
+        "stock": {
+          "type": "number",
+          "description": "Available stock quantity"
+        },
+        "image": {
+          "type": "string",
+          "description": "Main product preview image URL"
+        },
+        "additionalImages": {
+          "type": "string",
+          "description": "JSON string of additional gallery images"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed fabric and fit description"
+        },
+        "sizes": {
+          "type": "string",
+          "description": "Available comma-separated or JSON sizes: XS, S, M, L, XL, XXL, 3XL"
+        },
+        "colors": {
+          "type": "string",
+          "description": "Available color hex codes"
+        },
+        "isBestSeller": {
+          "type": "string",
+          "description": "Flag for best sellers"
+        },
+        "isTrending": {
+          "type": "string",
+          "description": "Flag for trending apparel"
+        },
+        "recentOrderCount": {
+          "type": "number",
+          "description": "Social proof order counter (e.g. 124 people ordered)"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["title", "category", "price", "stock", "image"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer e-commerce order details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Order identifier"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Customer UID or guest identifier"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Full name of the customer"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Customer contact email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number for delivery tracking"
+        },
+        "shippingAddress": {
+          "type": "string",
+          "description": "Complete shipping address line"
+        },
+        "city": {
+          "type": "string",
+          "description": "Delivery city"
+        },
+        "pincode": {
+          "type": "string",
+          "description": "Postal code"
+        },
+        "items": {
+          "type": "string",
+          "description": "JSON encoded string of ordered items"
+        },
+        "subtotal": {
+          "type": "number",
+          "description": "Subtotal amount in INR"
+        },
+        "discount": {
+          "type": "number",
+          "description": "Applied discount in INR"
+        },
+        "shipping": {
+          "type": "number",
+          "description": "Shipping fee in INR"
+        },
+        "total": {
+          "type": "number",
+          "description": "Grand total paid or payable in INR"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Payment gateway: UPI, Card, NetBanking, COD"
+        },
+        "paymentStatus": {
+          "type": "string",
+          "description": "Payment status: Paid, Pending COD, Pending Verification, Verified"
+        },
+        "paymentScreenshotUrl": {
+          "type": "string",
+          "description": "Data URL or storage link to uploaded payment confirmation screenshot"
+        },
+        "paymentScreenshotFileName": {
+          "type": "string",
+          "description": "Original file name of the payment screenshot"
+        },
+        "transactionRef": {
+          "type": "string",
+          "description": "Customer provided UPI UTR or payment reference number"
+        },
+        "upiId": {
+          "type": "string",
+          "description": "UPI VPA address used for the transaction"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["placed", "processing", "shipped", "delivered", "cancelled"],
+          "description": "Current order fulfillment milestone"
+        },
+        "trackingNotes": {
+          "type": "string",
+          "description": "Courier or production update notes"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Order creation timestamp"
+        }
+      },
+      "required": ["customerName", "email", "total", "status"]
+    },
+    "CustomDesign": {
+      "title": "CustomDesign",
+      "description": "Custom customer upload design order or quote request",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique custom design request ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Customer UID or guest identifier"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Customer full name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Customer email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Customer contact number"
+        },
+        "productType": {
+          "type": "string",
+          "description": "Type of garment: t-shirt, jersey, oversized, polo, etc."
+        },
+        "artworkUrl": {
+          "type": "string",
+          "description": "Uploaded design image or file data URL"
+        },
+        "artworkName": {
+          "type": "string",
+          "description": "Uploaded filename"
+        },
+        "frontMockupUrl": {
+          "type": "string",
+          "description": "Generated front garment mockup data URL"
+        },
+        "backMockupUrl": {
+          "type": "string",
+          "description": "Generated back garment mockup data URL"
+        },
+        "color": {
+          "type": "string",
+          "description": "Selected garment hex color"
+        },
+        "size": {
+          "type": "string",
+          "description": "Selected size"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Order quantity"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Special printing instructions, placement notes"
+        },
+        "estimatedPrice": {
+          "type": "number",
+          "description": "Calculated or approved quote price"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "approved", "in-printing", "rejected", "completed"],
+          "description": "Custom design order status"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["customerName", "productType", "quantity", "status"]
+    },
+    "BulkQuote": {
+      "title": "BulkQuote",
+      "description": "Bulk sports jersey and corporate team requests",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Bulk request ID"
+        },
+        "teamName": {
+          "type": "string",
+          "description": "School, college, club, or company name"
+        },
+        "contactName": {
+          "type": "string",
+          "description": "Team lead or manager name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone"
+        },
+        "sportType": {
+          "type": "string",
+          "description": "Sport type: Football, Cricket, Basketball, Marathon, Corporate"
+        },
+        "numberOfPlayers": {
+          "type": "number",
+          "description": "Number of jerseys needed"
+        },
+        "jerseyStyle": {
+          "type": "string",
+          "description": "Sublimation style, collar type, fit"
+        },
+        "roster": {
+          "type": "string",
+          "description": "JSON array of player names, jersey numbers, and sizes"
+        },
+        "deliveryDate": {
+          "type": "string",
+          "description": "Target tournament or event delivery date"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional requirements and logo placement details"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["submitted", "reviewing", "quoted", "confirmed"],
+          "description": "Status of the bulk quote"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp submitted"
+        }
+      },
+      "required": ["teamName", "contactName", "email", "numberOfPlayers", "status"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Document marking an authenticated UID as an administrator",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Admin email"
+        },
+        "role": {
+          "type": "string",
+          "description": "Administrator level"
+        },
+        "grantedAt": {
+          "type": "string",
+          "description": "Grant timestamp"
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and settings indexed by auth UID"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Store apparel products catalog"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer purchase orders and fulfillment tracking"
+    },
+    "/customDesigns/{designId}": {
+      "schema": "CustomDesign",
+      "description": "Custom printed apparel orders and mockup records"
+    },
+    "/bulkQuotes/{quoteId}": {
+      "schema": "BulkQuote",
+      "description": "Bulk team jersey inquiries and player rosters"
+    },
+    "/admins/{adminId}": {
+      "schema": "AdminRecord",
+      "description": "Privileged administrator identities"
+    }
+  }
+}

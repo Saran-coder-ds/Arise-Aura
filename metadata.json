@@ -1,0 +1,6 @@
+{
+  "name": "Arise Aura Clothing - Custom T-Shirts & Sports Jerseys",
+  "description": "Premium custom T-shirt and sports jersey printing store with live apparel mockup designer, bulk team orders, instant quotes, and admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
